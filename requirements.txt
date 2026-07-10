@@ -1,0 +1,13 @@
+pandas
+numpy
+matplotlib
+plotly
+scikit-learn
+xgboost
+shap
+streamlit
+sqlalchemy
+pymysql
+requests
+beautifulsoup4
+jupyter
