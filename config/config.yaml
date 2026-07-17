@@ -1,0 +1,27 @@
+# ==========================
+# Enterprise Risk Platform
+# 系统配置文件
+# ==========================
+
+database:
+  host: localhost
+  port: 3306
+  user: root
+  password: hkkwcn72@L
+  database: enterprise_risk_db
+  charset: utf8mb4
+
+generator:
+  company_count: 100
+  random_seed: 2026
+
+output:
+  csv_path: data/sample
+
+risk:
+  low_probability: 0.70
+  medium_probability: 0.20
+  high_probability: 0.10
+
+logging:
+  level: INFO
