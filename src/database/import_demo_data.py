@@ -23,6 +23,55 @@ TABLE_FILE_MAPPING = [
     ("company_opinion", "company_opinion.csv"),
 ]
 
+TABLE_COLUMNS = {
+    "company_basic": [
+        "company_id",
+        "company_name",
+        "unified_code",
+        "legal_person",
+        "registered_capital",
+        "establish_date",
+        "industry",
+        "province",
+        "city",
+        "business_status",
+    ],
+    "company_financial": [
+        "company_id",
+        "fiscal_year",
+        "total_assets",
+        "total_liabilities",
+        "operating_income",
+        "net_profit",
+        "asset_liability_ratio",
+    ],
+    "company_lawsuit": [
+        "company_id",
+        "case_number",
+        "case_type",
+        "plaintiff",
+        "defendant",
+        "filing_date",
+        "judgment_result",
+        "risk_level",
+    ],
+    "company_penalty": [
+        "company_id",
+        "penalty_authority",
+        "penalty_reason",
+        "penalty_amount",
+        "penalty_date",
+    ],
+    "company_opinion": [
+        "company_id",
+        "news_title",
+        "news_source",
+        "sentiment",
+        "publish_date",
+        "url",
+    ],
+}
+
 
 class DemoDataImporter:
     """Load generated sample CSV files into the project database."""
@@ -39,14 +88,7 @@ class DemoDataImporter:
 
         for table_name, filename in TABLE_FILE_MAPPING:
             dataframe = self._read_csv(filename)
-            dataframe.to_sql(
-                name=table_name,
-                con=self.engine,
-                if_exists="append",
-                index=False,
-                method="multi",
-                chunksize=500,
-            )
+            self._insert_dataframe(table_name, dataframe)
             print(f"Imported {len(dataframe)} rows into {table_name}.")
 
     def _validate_files(self) -> None:
@@ -76,6 +118,20 @@ class DemoDataImporter:
     def _read_csv(self, filename: str) -> pd.DataFrame:
         path = self.sample_dir / filename
         return pd.read_csv(path, encoding="utf-8-sig")
+
+    def _insert_dataframe(self, table_name: str, dataframe: pd.DataFrame) -> None:
+        columns = TABLE_COLUMNS[table_name]
+        placeholders = ", ".join(f":{column}" for column in columns)
+        column_list = ", ".join(columns)
+        statement = text(
+            f"INSERT INTO {table_name} ({column_list}) VALUES ({placeholders})"
+        )
+
+        records = dataframe[columns].where(pd.notnull(dataframe[columns]), None)
+        payload = records.to_dict(orient="records")
+
+        with self.engine.begin() as connection:
+            connection.execute(statement, payload)
 
 
 def main() -> None:
