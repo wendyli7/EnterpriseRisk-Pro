@@ -95,7 +95,7 @@ class DatabaseManager:
                 )
 
                 print(
-                    "✅ MySQL数据库连接成功"
+                    "MySQL数据库连接成功"
                 )
 
                 print(
@@ -107,7 +107,7 @@ class DatabaseManager:
         except Exception as e:
 
             print(
-                "❌ MySQL数据库连接失败"
+                "MySQL数据库连接失败"
             )
 
             print(e)

@@ -2,7 +2,7 @@
 
 > Enterprise Risk Profiling and Early Warning System Based on Multi-source Public Data
 
-![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
@@ -57,7 +57,7 @@ EnterpriseRisk-Pro
 
 ### Programming
 
-- Python
+- Python 3.12
 - SQL
 
 ### Database
