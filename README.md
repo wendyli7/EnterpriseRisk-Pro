@@ -67,3 +67,19 @@ Python 3.12、Pandas、NumPy、SQLAlchemy、MySQL 8.0。后续计划接入 FastA
 ## 作者
 
 Wendy Li
+## FastAPI 服务
+
+启动接口服务：
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn src.api.main:app --reload
+```
+
+接口文档地址：`http://127.0.0.1:8000/docs`
+
+核心接口：
+
+- `GET /health`：服务健康检查
+- `GET /companies?limit=20`：企业列表，可使用 `keyword` 搜索
+- `GET /companies/{company_id}`：企业详情及多源记录
+- `GET /companies/{company_id}/risk`：企业 Smoke Index 风险评分
