@@ -33,6 +33,23 @@ class SmokeIndexScorer:
 
     def score(self, features: pd.DataFrame | None = None) -> pd.DataFrame:
         dataframe = features.copy() if features is not None else self._load_or_build_features()
+        dataframe = dataframe.fillna({
+            "asset_liability_ratio": 0,
+            "profit_margin": 0,
+            "revenue_to_assets_ratio": 0,
+            "is_loss_making": 0,
+            "is_abnormal_status": 0,
+            "lawsuit_count": 0,
+            "medium_risk_lawsuit_count": 0,
+            "high_risk_lawsuit_count": 0,
+            "lawsuit_last_12m_count": 0,
+            "penalty_count": 0,
+            "penalty_total_amount": 0,
+            "penalty_last_12m_count": 0,
+            "negative_opinion_ratio": 0,
+            "negative_opinion_count": 0,
+            "opinion_last_90d_count": 0,
+        })
 
         dataframe["financial_score"] = dataframe.apply(self._financial_score, axis=1)
         dataframe["lawsuit_score"] = dataframe.apply(self._lawsuit_score, axis=1)
