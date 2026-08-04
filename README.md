@@ -83,3 +83,18 @@ Wendy Li
 - `GET /companies?limit=20`：企业列表，可使用 `keyword` 搜索
 - `GET /companies/{company_id}`：企业详情及多源记录
 - `GET /companies/{company_id}/risk`：企业 Smoke Index 风险评分
+## Render 部署
+
+项目包含 `render.yaml`，在 Render 中选择 New Blueprint，连接 GitHub 仓库后即可自动创建 Web Service。
+
+部署完成后访问：
+
+```text
+https://你的服务名.onrender.com/docs
+```
+
+服务启动命令：
+
+```text
+uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
+```
