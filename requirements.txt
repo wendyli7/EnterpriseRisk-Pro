@@ -16,3 +16,4 @@ openpyxl==3.1.5
 fastapi
 uvicorn
 pytest
+cryptography

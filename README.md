@@ -98,3 +98,12 @@ https://你的服务名.onrender.com/docs
 ```text
 uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
 ```
+## 导入 MySQL
+
+确认本地 MySQL 已启动并完成建库建表后，运行：
+
+```powershell
+.\.venv\Scripts\python.exe -m src.database.import_demo_data
+```
+
+当前演示数据库已导入 500 家企业、1500 条财务记录、399 条司法记录、281 条处罚记录和 1250 条舆情记录。可执行 `sql/05_verify_demo_data.sql` 验证数据量。
