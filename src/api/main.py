@@ -35,7 +35,7 @@ def home(keyword: str | None = Query(default=None, description="企业名称关�
     if keyword:
         mask = companies["company_name"].astype(str).str.contains(keyword, case=False, na=False)
         companies = companies[mask]
-    companies = companies.sort_values("company_id").head(100)
+    companies = companies.sort_values("company_id").head(500)
     options = "".join(
         f'<option value="{int(row.company_id)}">{int(row.company_id)} - {escape(str(row.company_name))}</option>'
         for row in companies.itertuples()
@@ -59,7 +59,7 @@ def home(keyword: str | None = Query(default=None, description="企业名称关�
     </head>
     <body><main><section>
       <h1>企业风险画像平台</h1>
-      <p>搜索企业名称，选择企业后查看企业详情或风险评分。</p>
+      <p>当前共有 500 家企业可查询。搜索企业名称，选择企业后查看企业详情或风险评分。</p>
       <form method="get" action="/">
         <label for="keyword">搜索企业</label>
         <input id="keyword" name="keyword" value="{escape(keyword or '')}" placeholder="例如：科技、制造、供应链">

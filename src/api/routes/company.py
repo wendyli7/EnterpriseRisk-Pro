@@ -29,7 +29,7 @@ def _records(dataframe: pd.DataFrame) -> list[dict[str, Any]]:
 @router.get("", response_model=list[CompanySummary])
 def list_companies(
     keyword: str | None = Query(default=None, description="Company name keyword"),
-    limit: int = Query(default=20, ge=1, le=100),
+    limit: int = Query(default=20, ge=1, le=500),
 ) -> list[CompanySummary]:
     dataframe = _read_table("company_basic")
     if keyword:
