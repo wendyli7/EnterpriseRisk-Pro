@@ -140,15 +140,16 @@ class DemoDataGenerator:
         for company_id in range(1, self.company_count + 1):
             province = self.random.choice(list(PROVINCE_CITY.keys()))
             city = self.random.choice(PROVINCE_CITY[province])
+            industry = self.random.choice(INDUSTRIES)
             records.append(
                 {
                     "company_id": company_id,
-                    "company_name": self._company_name(),
+                    "company_name": self._company_name(company_id, industry, city),
                     "unified_code": self._credit_code(company_id),
                     "legal_person": self._person_name(),
                     "registered_capital": self._money(self.random.uniform(500, 50000)),
                     "establish_date": self._random_date(365, 365 * 20).isoformat(),
-                    "industry": self.random.choice(INDUSTRIES),
+                    "industry": industry,
                     "province": province,
                     "city": city,
                     "business_status": self.random.choices(
@@ -238,8 +239,12 @@ class DemoDataGenerator:
                 )
         return pd.DataFrame(records)
 
-    def _company_name(self) -> str:
-        return f"{self.random.choice(COMPANY_BRANDS)}{self.random.choice(COMPANY_SUFFIXES)}"
+    def _company_name(self, company_id: int | None = None, industry: str = "", city: str = "") -> str:
+        brand = self.random.choice(COMPANY_BRANDS)
+        suffix = self.random.choice(COMPANY_SUFFIXES)
+        if company_id is None:
+            return f"{brand}{suffix}"
+        return f"{city}{brand}{suffix}（示例{company_id:04d}）"
 
     def _person_name(self) -> str:
         return f"{self.random.choice(SURNAMES)}{self.random.choice(GIVEN_NAMES)}{self.random.choice(GIVEN_NAMES)}"

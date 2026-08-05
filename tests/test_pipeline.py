@@ -16,16 +16,17 @@ class PipelineTests(unittest.TestCase):
         first = DemoDataGenerator().generate()
         second = DemoDataGenerator().generate()
 
-        self.assertEqual(len(first.company_basic), 100)
-        self.assertEqual(len(first.company_financial), 300)
-        self.assertEqual(len(first.company_opinion), 261)
+        self.assertEqual(len(first.company_basic), 500)
+        self.assertEqual(len(first.company_financial), 1500)
+        self.assertEqual(len(first.company_opinion), 1250)
+        self.assertEqual(first.company_basic["company_name"].nunique(), 500)
         pd.testing.assert_frame_equal(first.company_basic, second.company_basic)
 
     def test_feature_builder_returns_one_row_per_company(self) -> None:
         features = RiskFeatureBuilder(source="csv").build()
 
-        self.assertEqual(len(features), 100)
-        self.assertEqual(features["company_id"].nunique(), 100)
+        self.assertEqual(len(features), 500)
+        self.assertEqual(features["company_id"].nunique(), 500)
         required = {
             "asset_liability_ratio",
             "lawsuit_count",

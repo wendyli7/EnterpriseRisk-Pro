@@ -12,7 +12,7 @@ database:
   charset: utf8mb4
 
 generator:
-  company_count: 100
+  company_count: 500
   random_seed: 2026
 
 output:
