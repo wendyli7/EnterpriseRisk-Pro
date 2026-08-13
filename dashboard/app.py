@@ -8,6 +8,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from src.analysis.risk_analysis import RiskFeatureBuilder
+from src.scoring.smoke_index import SmokeIndexScorer
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCORE_PATH = ROOT / "data" / "processed" / "enterprise_smoke_index.csv"
@@ -18,8 +21,12 @@ st.set_page_config(page_title="企业风险画像", page_icon="📊", layout="wi
 
 @st.cache_data
 def load_data() -> tuple[pd.DataFrame, pd.DataFrame]:
-    if not SCORE_PATH.exists() or not FEATURE_PATH.exists():
-        raise FileNotFoundError("请先运行风险特征聚合和评分命令。")
+    if not FEATURE_PATH.exists():
+        builder = RiskFeatureBuilder(source="csv")
+        builder.save(builder.build())
+    if not SCORE_PATH.exists():
+        scorer = SmokeIndexScorer()
+        scorer.save(scorer.score())
     return (
         pd.read_csv(SCORE_PATH, encoding="utf-8-sig"),
         pd.read_csv(FEATURE_PATH, encoding="utf-8-sig"),
