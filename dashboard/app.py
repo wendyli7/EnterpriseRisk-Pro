@@ -92,6 +92,7 @@ def main() -> None:
     detail_columns[3].metric("司法风险", f"{selected['lawsuit_score']:.2f}")
     detail_columns[4].metric("处罚风险", f"{selected['penalty_score']:.2f}")
     st.info(f"风险摘要：{selected['risk_summary']}")
+    st.markdown(f"[打开 {selected['company_name']} 的风险报告](http://127.0.0.1:8000/reports/{int(selected_id)})")
 
     factors = pd.DataFrame(
         {"风险因素": ["财务", "司法", "处罚", "舆情"], "分数": [selected["financial_score"], selected["lawsuit_score"], selected["penalty_score"], selected["opinion_score"]]}

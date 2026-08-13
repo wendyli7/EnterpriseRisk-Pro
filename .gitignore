@@ -35,3 +35,7 @@ data/raw/*
 
 data/processed/*
 !data/processed/.gitkeep
+
+# Generated reports
+reports/output/*
+!reports/output/.gitkeep

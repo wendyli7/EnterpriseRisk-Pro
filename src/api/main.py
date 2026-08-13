@@ -12,6 +12,7 @@ from fastapi.responses import HTMLResponse
 from src.api.routes.company import _read_table
 from src.api.routes.company import router as company_router
 from src.api.routes.risk import router as risk_router
+from src.api.routes.report import router as report_router
 from src.api.routes.view import router as view_router
 
 app = FastAPI(
@@ -96,4 +97,5 @@ def health() -> dict[str, str]:
 
 app.include_router(company_router)
 app.include_router(risk_router)
+app.include_router(report_router)
 app.include_router(view_router)
