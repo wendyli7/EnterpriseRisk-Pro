@@ -104,6 +104,9 @@ uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
 
 ```powershell
 .\.venv\Scripts\python.exe -m src.database.import_demo_data
+.\.venv\Scripts\python.exe -m src.database.persist_risk_results
 ```
 
 当前演示数据库已导入 500 家企业、1500 条财务记录、399 条司法记录、281 条处罚记录和 1250 条舆情记录。可执行 `sql/05_verify_demo_data.sql` 验证数据量。
+
+评分结果持久化命令会将最新评分写入 `risk_score` 和 `smoke_index_result` 表。
