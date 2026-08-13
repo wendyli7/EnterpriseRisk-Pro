@@ -3,16 +3,22 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+# Render starts Streamlit from the dashboard directory; expose the repository
+# root so the shared analysis and scoring packages can be imported reliably.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from src.analysis.risk_analysis import RiskFeatureBuilder
 from src.scoring.smoke_index import SmokeIndexScorer
 
 
-ROOT = Path(__file__).resolve().parents[1]
 SCORE_PATH = ROOT / "data" / "processed" / "enterprise_smoke_index.csv"
 FEATURE_PATH = ROOT / "data" / "processed" / "enterprise_risk_features.csv"
 
