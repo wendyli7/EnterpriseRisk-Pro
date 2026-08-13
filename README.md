@@ -11,9 +11,11 @@
 - [x] 企业级风险特征聚合
 - [x] 规则版 Smoke Index 风险评分 MVP
 - [x] 日志配置与自动化测试
-- [ ] FastAPI 查询与评分接口
+- [x] FastAPI 查询与评分接口
 - [ ] Streamlit 风险画像看板
-- [ ] 报告生成与部署优化
+- [ ] 单企业风险报告生成
+- [x] Render 部署配置
+- [ ] Render 线上部署验证
 
 ## 数据链路
 
@@ -59,10 +61,9 @@ Python 3.12、Pandas、NumPy、SQLAlchemy、MySQL 8.0。后续计划接入 FastA
 
 ## 下一步
 
-1. 增加 FastAPI 企业查询和风险评分接口。
-2. 将评分结果写入 `risk_score` 或 `smoke_index_result` 表。
-3. 搭建展示企业画像、评分、风险因素和 Top 风险企业的 Dashboard。
-4. 增加单企业风险报告生成。
+1. 搭建展示企业画像、评分、风险因素和 Top 风险企业的 Dashboard。
+2. 增加单企业风险报告生成。
+3. 完成 Render 线上部署验证和项目演示材料。
 
 ## 作者
 

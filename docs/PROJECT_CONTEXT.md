@@ -20,6 +20,9 @@ EnterpriseRisk-Pro 面向金融风控场景构建企业风险画像与预警能�
 - `src/scoring/smoke_index.py` 规则版风险评分模块
 - `src/utils/logger.py` 统一日志配置
 - `tests/test_pipeline.py` 数据链路自动化测试
+- `src/api/` FastAPI 查询、详情和风险评分接口
+- `src/database/persist_risk_results.py` 风险结果持久化
+- `render.yaml` Render 部署配置
 
 ## 当前数据闭环
 
@@ -45,7 +48,7 @@ src/generator/generate_company_data.py
 
 ## 下一步建议
 
-优先开发 FastAPI 查询接口，并将当前评分结果映射到数据库的 `risk_score` 或 `smoke_index_result` 表；之后搭建 Streamlit Dashboard 和单企业风险报告生成能力。
+当前优先开发 Streamlit Dashboard 和单企业风险报告；之后完成 Render 线上部署验证。
 
 ## 已知事项
 
