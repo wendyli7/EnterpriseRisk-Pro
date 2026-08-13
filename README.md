@@ -12,7 +12,7 @@
 - [x] 规则版 Smoke Index 风险评分 MVP
 - [x] 日志配置与自动化测试
 - [x] FastAPI 查询与评分接口
-- [ ] Streamlit 风险画像看板
+- [x] Streamlit 风险画像看板
 - [ ] 单企业风险报告生成
 - [x] Render 部署配置
 - [ ] Render 线上部署验证
@@ -35,6 +35,14 @@
 .\.venv\Scripts\python.exe -m src.analysis.risk_analysis
 .\.venv\Scripts\python.exe -m src.scoring.smoke_index
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
+
+启动 Dashboard：
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run dashboard/app.py
+```
+
+默认地址：`http://localhost:8501`
 ```
 
 项目优先读取 `data/sample/*.csv`，当样例 CSV 不存在时再尝试读取 MySQL，因此无需数据库也可以完成本地演示和测试。
