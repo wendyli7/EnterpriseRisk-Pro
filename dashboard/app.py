@@ -21,16 +21,16 @@ st.set_page_config(page_title="企业风险画像", page_icon="📊", layout="wi
 
 @st.cache_data
 def load_data() -> tuple[pd.DataFrame, pd.DataFrame]:
-    if not FEATURE_PATH.exists():
-        builder = RiskFeatureBuilder(source="csv")
-        builder.save(builder.build())
-    if not SCORE_PATH.exists():
-        scorer = SmokeIndexScorer()
-        scorer.save(scorer.score())
-    return (
-        pd.read_csv(SCORE_PATH, encoding="utf-8-sig"),
-        pd.read_csv(FEATURE_PATH, encoding="utf-8-sig"),
-    )
+    if FEATURE_PATH.exists():
+        features = pd.read_csv(FEATURE_PATH, encoding="utf-8-sig")
+    else:
+        features = RiskFeatureBuilder(source="csv").build()
+
+    if SCORE_PATH.exists():
+        scores = pd.read_csv(SCORE_PATH, encoding="utf-8-sig")
+    else:
+        scores = SmokeIndexScorer().score(features)
+    return scores, features
 
 
 def main() -> None:
@@ -39,8 +39,8 @@ def main() -> None:
 
     try:
         scores, features = load_data()
-    except FileNotFoundError as error:
-        st.error(str(error))
+    except Exception as error:
+        st.error(f"风险数据加载失败：{type(error).__name__}: {error}")
         st.code(
             ".\\.venv\\Scripts\\python.exe -m src.analysis.risk_analysis\n"
             ".\\.venv\\Scripts\\python.exe -m src.scoring.smoke_index"
