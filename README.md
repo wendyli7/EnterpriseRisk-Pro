@@ -118,6 +118,8 @@ streamlit run dashboard/app.py --server.address 0.0.0.0 --server.port $PORT --se
 ```
 ## 导入 MySQL
 
+数据库连接信息通过 `ER_DB_HOST`、`ER_DB_PORT`、`ER_DB_USER`、`ER_DB_PASSWORD`、`ER_DB_NAME` 和 `ER_DB_CHARSET` 环境变量读取。请参考 `.env.example` 配置本地环境，不要把真实密码提交到 GitHub；Render 部署时在 Environment Variables 中设置这些变量。
+
 确认本地 MySQL 已启动并完成建库建表后，运行：
 
 ```powershell

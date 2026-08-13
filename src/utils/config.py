@@ -4,6 +4,7 @@ config.py
 """
 
 from pathlib import Path
+import os
 import yaml
 
 
@@ -22,7 +23,21 @@ class Config:
             self.config = yaml.safe_load(f)
 
     def get_database_config(self):
-        return self.config["database"]
+        database = dict(self.config["database"])
+        environment_keys = {
+            "host": "ER_DB_HOST",
+            "port": "ER_DB_PORT",
+            "user": "ER_DB_USER",
+            "password": "ER_DB_PASSWORD",
+            "database": "ER_DB_NAME",
+            "charset": "ER_DB_CHARSET",
+        }
+        for field, environment_key in environment_keys.items():
+            value = os.getenv(environment_key)
+            if value:
+                database[field] = value
+        database["port"] = int(database["port"])
+        return database
 
     def get_generator_config(self):
         return self.config["generator"]

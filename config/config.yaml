@@ -7,7 +7,7 @@ database:
   host: localhost
   port: 3306
   user: root
-  password: hkkwcn72@L
+  password: ""
   database: enterprise_risk_db
   charset: utf8mb4
 
