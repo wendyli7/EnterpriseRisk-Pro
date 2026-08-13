@@ -98,16 +98,23 @@ Wendy Li
 
 项目包含 `render.yaml`，在 Render 中选择 New Blueprint，连接 GitHub 仓库后即可自动创建 Web Service。
 
-部署完成后访问：
+部署完成后会得到两个服务地址：
 
 ```text
-https://你的服务名.onrender.com/docs
+https://enterprise-risk-pro-api.onrender.com/docs
+https://enterprise-risk-pro-dashboard.onrender.com
 ```
 
 服务启动命令：
 
 ```text
 uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
+```
+
+Dashboard 服务启动命令：
+
+```text
+streamlit run dashboard/app.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
 ```
 ## 导入 MySQL
 
