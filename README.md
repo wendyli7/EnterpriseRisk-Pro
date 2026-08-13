@@ -116,6 +116,8 @@ Dashboard 服务启动命令：
 ```text
 streamlit run dashboard/app.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
 ```
+
+Render 环境变量：API 服务如需连接云数据库，请在 Render 的 Environment 中配置 `.env.example` 中的 `ER_DB_*` 变量；当前演示链路优先读取仓库内的样例 CSV。
 ## 导入 MySQL
 
 数据库连接信息通过 `ER_DB_HOST`、`ER_DB_PORT`、`ER_DB_USER`、`ER_DB_PASSWORD`、`ER_DB_NAME` 和 `ER_DB_CHARSET` 环境变量读取。请参考 `.env.example` 配置本地环境，不要把真实密码提交到 GitHub；Render 部署时在 Environment Variables 中设置这些变量。
