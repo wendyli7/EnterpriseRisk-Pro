@@ -15,7 +15,7 @@
 - [x] Streamlit 风险画像看板
 - [x] 单企业风险报告生成
 - [x] Render 部署配置
-- [ ] Render 线上部署验证
+- [x] Render 线上部署验证
 
 ## 数据链路
 
